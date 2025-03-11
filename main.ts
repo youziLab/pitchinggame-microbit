@@ -5,16 +5,19 @@ function 常量初始化 () {
     basic.showIcon(IconNames.Chessboard)
 }
 function 遥控控制 () {
+    if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.Cir)) {
+        neZha.setMotorSpeed(neZha.MotorList.M3, 50)
+    } else {
+        neZha.setMotorSpeed(neZha.MotorList.M3, 0)
+    }
     if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.Tri)) {
         neZha.setMotorSpeed(neZha.MotorList.M4, 100)
     }
     if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.Squ)) {
         neZha.setMotorSpeed(neZha.MotorList.M4, 0)
     }
-    if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.Cir)) {
-        neZha.setMotorSpeed(neZha.MotorList.M3, 100)
-    } else {
-        neZha.setMotorSpeed(neZha.MotorList.M3, 0)
+    if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.X)) {
+        neZha.setMotorSpeed(neZha.MotorList.M4, -100)
     }
 }
 function 启动初始化 () {
