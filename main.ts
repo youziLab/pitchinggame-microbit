@@ -1,7 +1,4 @@
 function 常量初始化 () {
-    常量_舵机_上臂开角度 = 135
-    常量_舵机_上臂关角度 = 45
-    常量_推杆时间 = 500
     basic.showIcon(IconNames.Chessboard)
 }
 function 遥控控制 () {
@@ -19,14 +16,42 @@ function 遥控控制 () {
     if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.X)) {
         neZha.setMotorSpeed(neZha.MotorList.M4, -100)
     }
+    if (PlanetX_Basic.get_Attention_Value(PlanetX_Basic.value_level.Sele)) {
+        自动任务()
+        速度解算(0, 0)
+    }
 }
+function 自动任务 () {
+    速度解算(50, 0)
+    basic.pause(500)
+    速度解算(0, 0)
+    basic.pause(200)
+    速度解算(0, -50)
+    basic.pause(200)
+    速度解算(0, 0)
+    basic.pause(200)
+    速度解算(40, 0)
+    basic.pause(1000)
+    速度解算(0, 0)
+    basic.pause(200)
+    速度解算(0, -50)
+    basic.pause(300)
+    速度解算(0, 0)
+    basic.pause(200)
+    速度解算(30, 0)
+    basic.pause(600)
+    neZha.setMotorSpeed(neZha.MotorList.M4, -100)
+    basic.pause(1000)
+    neZha.setMotorSpeed(neZha.MotorList.M4, 0)
+    速度解算(-30, 0)
+    basic.pause(600)
+}
+input.onButtonPressed(Button.A, function () {
+    速度解算(100, 0)
+    basic.pause(500)
+    速度解算(0, 0)
+})
 function 启动初始化 () {
-    basic.showIcon(IconNames.Diamond)
-    neZha.setServoAngel(neZha.ServoTypeList._360, neZha.ServoList.S1, 常量_舵机_上臂开角度)
-    basic.pause(200)
-    neZha.setServoAngel(neZha.ServoTypeList._360, neZha.ServoList.S1, 常量_舵机_上臂关角度)
-    basic.pause(200)
-    neZha.setServoAngel(neZha.ServoTypeList._360, neZha.ServoList.S1, 常量_舵机_上臂开角度)
     basic.showIcon(IconNames.Yes)
 }
 // 运动模型正解:已知小车线速度、角速度 计算 左右轮的线速度
@@ -68,9 +93,6 @@ let 局部_RC_Y = 0
 let 速度解算局部_MAX = 0
 let 速度解算局部_v2 = 0
 let 速度解算局部_v1 = 0
-let 常量_推杆时间 = 0
-let 常量_舵机_上臂关角度 = 0
-let 常量_舵机_上臂开角度 = 0
 常量初始化()
 启动初始化()
 basic.forever(function () {
